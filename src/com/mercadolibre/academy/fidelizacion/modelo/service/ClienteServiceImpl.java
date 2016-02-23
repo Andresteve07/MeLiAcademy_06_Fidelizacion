@@ -3,6 +3,7 @@ package com.mercadolibre.academy.fidelizacion.modelo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mercadolibre.academy.fidelizacion.exception.DeleteException;
 import com.mercadolibre.academy.fidelizacion.exception.InsertException;
 import com.mercadolibre.academy.fidelizacion.exception.NoDataFoundException;
 import com.mercadolibre.academy.fidelizacion.exception.SaveOrUpdateException;
@@ -81,12 +82,12 @@ public class ClienteServiceImpl implements ClienteService {
 		}
 	}
 
-	public void delete(Cliente instance) throws SaveOrUpdateException {
+	public void delete(Cliente instance) throws DeleteException {
 		try {
 			dao.saveOrUpdate(instance);
 		} catch (Exception exception) {
-			SaveOrUpdateException souExc = new SaveOrUpdateException(Mensaje.getResource().getString("msje.SaveOrUpdateExc")+"Cliente", exception);
-			throw souExc;
+			DeleteException dExc = new DeleteException(Mensaje.getResource().getString("msje.DeleteExc")+"Cliente", exception);
+			throw dExc;
 		}
 	}
 }

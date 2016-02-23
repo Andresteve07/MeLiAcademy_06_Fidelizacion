@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public abstract class GenericHibernateDaoImpl<T extends Serializable, E> extends HibernateDaoSupport implements GenericHibernateDao<T, E> {
@@ -17,7 +16,7 @@ public abstract class GenericHibernateDaoImpl<T extends Serializable, E> extends
 	
 	public GenericHibernateDaoImpl() {
 		if(sessionFactory == null) {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
+			sessionFactory = SessionFactorySingleton.getSessionFactory();
 		}
 	}
 
