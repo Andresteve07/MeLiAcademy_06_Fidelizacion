@@ -21,10 +21,15 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	public Cliente findById(Integer id) throws NoDataFoundException {
 		Cliente instance = null;
+		NoDataFoundException ndfExc = null;
 		try {
 			instance = dao.findById(id);
 		} catch (Exception exception) {
-			NoDataFoundException ndfExc = new NoDataFoundException(Mensaje.getResource().getString("msje.NoDataFoundExc") + "Cliente", exception);
+			ndfExc = new NoDataFoundException(Mensaje.getResource().getString("msje.NoDataFoundExc") + "Cliente", exception);
+			throw ndfExc;
+		}
+		if(instance == null){
+			ndfExc = new NoDataFoundException(Mensaje.getResource().getString("error.instanciaNula") + "Cliente");
 			throw ndfExc;
 		}
 		return instance;
