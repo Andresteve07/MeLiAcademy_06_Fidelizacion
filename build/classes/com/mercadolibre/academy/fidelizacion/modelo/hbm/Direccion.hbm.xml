@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/02/2016 16:08:18 by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.mercadolibre.academy.fidelizacion.modelo.entity.Direccion" table="direccion" catalog="fidelizacion" optimistic-lock="version">
+        <id name="idDireccion" type="java.lang.Integer">
+            <column name="ID_DIRECCION" />
+            <generator class="identity" />
+        </id>
+        <property name="calle" type="string">
+            <column name="CALLE" length="50" not-null="true" />
+        </property>
+        <property name="numero" type="int">
+            <column name="NUMERO" not-null="true" />
+        </property>
+        <property name="localidad" type="string">
+            <column name="LOCALIDAD" length="50" not-null="true" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="PROVINCIA" length="50" not-null="true" />
+        </property>
+        <property name="pais" type="string">
+            <column name="PAIS" length="50" not-null="true" />
+        </property>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_DIRECCION" not-null="true" />
+            </key>
+            <one-to-many class="com.mercadolibre.academy.fidelizacion.modelo.entity.Cliente" />
+        </set>
+    </class>
+</hibernate-mapping>
