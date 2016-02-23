@@ -37,11 +37,16 @@ public class ClienteServiceImpl implements ClienteService {
 
 	public List<Cliente> findAll() throws NoDataFoundException {
 		List<Cliente> instances = null;
+		NoDataFoundException ndfExc = null;
 		try {
 			instances = dao.findAll();
 		} catch (Exception exception) {
 			instances = new ArrayList<Cliente>();
-			NoDataFoundException ndfExc = new NoDataFoundException(Mensaje.getResource().getString("msje.NoDataFoundExc") + "Cliente", exception);
+			ndfExc = new NoDataFoundException(Mensaje.getResource().getString("msje.NoDataFoundExc") + "Cliente", exception);
+			throw ndfExc;
+		}
+		if(instances.size() == 0){
+			ndfExc = new NoDataFoundException(Mensaje.getResource().getString("error.listaNula") + "Cliente");
 			throw ndfExc;
 		}
 		return instances;
